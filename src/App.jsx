@@ -9,9 +9,6 @@ import './styles/root.scss';
 const NEW_GAME = [{ board: Array(9).fill(null), isXNext: true }];
 
 const App = () => {
-  //useState has two args
-  // one is initial state that gives the array of initial states
-  // second is the updated values of array
   const [history, setHistory] = useState(NEW_GAME);
   const [currentMove, setCurrentMove] = useState(0);
   const current = history[currentMove];
@@ -51,17 +48,26 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>TIC TAC TOE</h1>
+      <h1>
+        <span className="text-orange">TIC</span> TAC{' '}
+        <span className="text-green">TOE</span>
+      </h1>
       <StatusMessage winner={winner} current={current} />
       <Board
         board={current.board}
         handleSquareClick={handleSquareClick}
         winningSquares={winningSquares}
       />
-      <button type="button" onClick={onNewGame}>
+      <button
+        type="button"
+        onClick={onNewGame}
+        className={`btn-reset ${winner ? 'active' : ''}`}
+      >
         Start new game
       </button>
+      <h2 style={{ fontWeight: 'normal' }}>Current game history</h2>
       <History history={history} moveTo={moveTo} currentMove={currentMove} />
+      <div className="bg-balls" />
     </div>
   );
 };
