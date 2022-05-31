@@ -1,13 +1,15 @@
 import React from 'react';
 import Square from './Square';
 
-// We received board and handleSquareCLick props as args in here to use them from App.jsx
-const Board = ({ board, handleSquareClick }) => {
+const Board = ({ board, handleSquareClick, winningSquares }) => {
   const renderSquare = position => {
+    const isWinningSquare = winningSquares.includes(position);
+
     return (
       <Square
         value={board[position]}
         onClick={() => handleSquareClick(position)}
+        isWinningSquare={isWinningSquare}
       />
     );
   };
